@@ -1,0 +1,287 @@
+-- DROP VIEW product_specs_update2;
+CREATE VIEW rental_log_view AS
+
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+                                   caps_serialrentallog.statuscode AS 'Active',
+                  caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+                  caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+                  caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+                  caps_productcategory.caps_name                      AS 'category',
+                  caps_serialrentallog.caps_productcategoryserial            AS 'category_serial',
+NULL    AS 'product_content',
+NULL   AS 'short_name',
+NULL   AS 'product_title',
+NULL   AS 'photo',
+NULL   AS 'product_cfm',
+NULL   AS 'product_cap_mmin',
+NULL   AS 'product_psi_working',
+NULL   AS 'prime_power_kva',
+NULL   AS 'prime_power_kw'            
+                  
+FROM ((caps_serialrentallog
+       JOIN caps_productcategory ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial )))
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = 'f5a28e7e-64f0-e711-8135-e0071b67ac81'
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active'
+ 
+UNION
+-- Air Treatment
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+                                   caps_serialrentallog.statuscode AS 'Active',
+                  caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+                  caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+                  caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+                  caps_productcategory.caps_name                      AS 'category',
+                  caps_serialrentallog.caps_productcategoryserial            AS 'category_serial',
+NULL    AS 'product_content',
+NULL   AS 'short_name',
+NULL   AS 'product_title',
+NULL   AS 'photo',
+NULL   AS 'product_cfm',
+NULL   AS 'product_cap_mmin',
+NULL   AS 'product_psi_working',
+NULL   AS 'prime_power_kva',
+NULL   AS 'prime_power_kw'           
+                  
+FROM ((caps_serialrentallog
+       JOIN caps_productcategory ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial )))
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = 'bc7d2b8d-64f0-e711-8135-e0071b67ac81'
+and caps_serialrentallog.caps_productserialnumber > ''
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active'
+
+UNION
+-- Blower
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+                                   caps_serialrentallog.statuscode AS 'Active',
+                  caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+                  caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+                  caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+                  caps_productcategory.caps_name                      AS 'category',
+                  caps_serialrentallog.caps_productcategoryserial            AS 'category_serial',
+NULL    AS 'product_content',
+NULL   AS 'short_name',
+NULL   AS 'product_title',
+NULL   AS 'photo',
+NULL   AS 'product_cfm',
+NULL   AS 'product_cap_mmin',
+NULL   AS 'product_psi_working',
+NULL   AS 'prime_power_kva',
+NULL   AS 'prime_power_kw'              
+                  
+FROM ((caps_serialrentallog
+       JOIN caps_productcategory ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial )))
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = 'd70fcd93-64f0-e711-8135-e0071b67ac81'
+and caps_serialrentallog.caps_productserialnumber > ''
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active'
+
+
+UNION
+-- generator
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+              caps_serialrentallog.statuscode AS 'Active',
+              caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+              caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+              caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+              caps_productcategory.caps_name                      AS 'category',
+              caps_serialrentallog.caps_productcategoryserial     AS 'category_serial',
+product_specs_update2.post_content                  AS 'product_content',
+product_specs_update2.short_name                    AS 'short_name',
+product_specs_update2.post_title                    AS 'product_title',
+product_specs_update2.image                         AS 'photo',
+product_specs_update2.capacity_cfm_107              AS 'product_cfm',
+product_specs_update2.capacity_m3min_107            AS 'product_cap_mmin',
+product_specs_update2.working_pressure_psi_107      AS 'product_psi_working',
+product_specs_update2.prime_power_kva_68            AS 'prime_power_kva',
+product_specs_update2.prime_power_kw_68             AS 'prime_power_kw'
+
+FROM ((caps_serialrentallog
+      JOIN caps_productcategory
+      ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial ))
+      LEFT JOIN product_specs_update2
+      ON( product_specs_update2.post_title LIKE Concat('%',caps_serialrentallog.caps_productserialnumber, '%'))    
+     )
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = '281497e8-64f0-e711-8135-e0071b67ac81'
+and caps_serialrentallog.caps_productserialnumber > ''
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active'
+
+
+UNION
+-- Lighting Tower
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+                                   caps_serialrentallog.statuscode AS 'Active',
+                  caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+                  caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+                  caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+                  caps_productcategory.caps_name                      AS 'category',
+                  caps_serialrentallog.caps_productcategoryserial            AS 'category_serial',
+NULL    AS 'product_content',
+NULL   AS 'short_name',
+NULL   AS 'product_title',
+NULL   AS 'photo',
+NULL   AS 'product_cfm',
+NULL   AS 'product_cap_mmin',
+NULL   AS 'product_psi_working',
+NULL   AS 'prime_power_kva',
+NULL   AS 'prime_power_kw'          
+                  
+FROM ((caps_serialrentallog
+       JOIN caps_productcategory ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial )))
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = '3d3c7df5-64f0-e711-8135-e0071b67ac81'
+and caps_serialrentallog.caps_productserialnumber > ''
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active'
+
+UNION
+-- Portable Compressor
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+              caps_serialrentallog.statuscode AS 'Active',
+              caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+              caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+              caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+              caps_productcategory.caps_name                      AS 'category',
+              caps_serialrentallog.caps_productcategoryserial            AS 'category_serial',
+product_specs_update2.post_content                  AS 'product_content',
+product_specs_update2.short_name                    AS 'short_name',
+product_specs_update2.post_title                    AS 'product_title',
+product_specs_update2.image                         AS 'photo',
+product_specs_update2.capacity_cfm_107              AS 'product_cfm',
+product_specs_update2.capacity_m3min_107            AS 'product_cap_mmin',
+product_specs_update2.working_pressure_psi_107      AS 'product_psi_working',
+product_specs_update2.prime_power_kva_68            AS 'prime_power_kva',
+product_specs_update2.prime_power_kw_68             AS 'prime_power_kw'         
+                  
+FROM ((caps_serialrentallog
+      JOIN caps_productcategory
+      ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial ))
+      LEFT JOIN product_specs_update2
+      ON( product_specs_update2.post_title LIKE Concat('%',caps_serialrentallog.caps_productserialnumber, '%'))    
+     )
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = '6997ac79-65f0-e711-8135-e0071b67ac81'
+and caps_serialrentallog.caps_productserialnumber > ''
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active'
+
+UNION
+-- Reciprocating Air Compressor
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+                                   caps_serialrentallog.statuscode AS 'Active',
+                  caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+                  caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+                  caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+                  caps_productcategory.caps_name                      AS 'category',
+                  caps_serialrentallog.caps_productcategoryserial            AS 'category_serial',
+product_specs_update2.post_content                  AS 'product_content',
+product_specs_update2.short_name                    AS 'short_name',
+product_specs_update2.post_title                    AS 'product_title',
+product_specs_update2.image                         AS 'photo',
+product_specs_update2.capacity_cfm_107              AS 'product_cfm',
+product_specs_update2.capacity_m3min_107            AS 'product_cap_mmin',
+product_specs_update2.working_pressure_psi_107      AS 'product_psi_working',
+product_specs_update2.prime_power_kva_68            AS 'prime_power_kva',
+product_specs_update2.prime_power_kw_68             AS 'prime_power_kw'
+
+FROM ((caps_serialrentallog
+      JOIN caps_productcategory
+      ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial ))
+      LEFT JOIN product_specs_update2
+      ON( product_specs_update2.post_title LIKE Concat('%',caps_serialrentallog.caps_productserialnumber, '%'))    
+     )
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = '67cf896a-28c9-e711-815c-e0071b684991'
+and caps_serialrentallog.caps_productserialnumber > ''
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active'
+
+UNION
+-- Refrigerated Dryer
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+                                   caps_serialrentallog.statuscode AS 'Active',
+                  caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+                  caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+                  caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+                  caps_productcategory.caps_name                      AS 'category',
+                  caps_serialrentallog.caps_productcategoryserial            AS 'category_serial',
+NULL    AS 'product_content',
+NULL   AS 'short_name',
+NULL   AS 'product_title',
+NULL   AS 'photo',
+NULL   AS 'product_cfm',
+NULL   AS 'product_cap_mmin',
+NULL   AS 'product_psi_working',
+NULL   AS 'prime_power_kva',
+NULL   AS 'prime_power_kw'         
+                  
+FROM ((caps_serialrentallog
+       JOIN caps_productcategory ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial )))
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = 'd0f130c6-2884-ee11-8179-6045bd3df62c'
+and caps_serialrentallog.caps_productserialnumber > ''
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active'
+
+
+UNION
+-- Rotary Screw Air Compressor
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+                                   caps_serialrentallog.statuscode AS 'Active',
+                  caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+                  caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+                  caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+                  caps_productcategory.caps_name                      AS 'category',
+                  caps_serialrentallog.caps_productcategoryserial            AS 'category_serial',
+product_specs_update2.post_content                  AS 'product_content',
+product_specs_update2.short_name                    AS 'short_name',
+product_specs_update2.post_title                    AS 'product_title',
+product_specs_update2.image                         AS 'photo',
+product_specs_update2.capacity_cfm_107              AS 'product_cfm',
+product_specs_update2.capacity_m3min_107            AS 'product_cap_mmin',
+product_specs_update2.working_pressure_psi_107      AS 'product_psi_working',
+product_specs_update2.prime_power_kva_68            AS 'prime_power_kva',
+product_specs_update2.prime_power_kw_68             AS 'prime_power_kw'
+
+FROM ((caps_serialrentallog
+      JOIN caps_productcategory
+      ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial ))
+      LEFT JOIN product_specs_update2
+      ON( product_specs_update2.post_content LIKE Concat('%',caps_serialrentallog.caps_productserialnumber, '%'))    
+     )
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = 'd2b2c2e4-61b9-e711-8156-e0071b684991'
+and caps_serialrentallog.caps_productserialnumber > ''
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active'
+
+UNION
+-- Scissor Lift
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+                                   caps_serialrentallog.statuscode AS 'Active',
+                  caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+                  caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+                  caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+                  caps_productcategory.caps_name                      AS 'category',
+                  caps_serialrentallog.caps_productcategoryserial            AS 'category_serial',
+NULL    AS 'product_content',
+NULL   AS 'short_name',
+NULL   AS 'product_title',
+NULL   AS 'photo',
+NULL   AS 'product_cfm',
+NULL   AS 'product_cap_mmin',
+NULL   AS 'product_psi_working',
+NULL   AS 'prime_power_kva',
+NULL   AS 'prime_power_kw'      
+                  
+FROM ((caps_serialrentallog
+       JOIN caps_productcategory ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial )))
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = 'fdfd691a-66f0-e711-8135-e0071b67ac81'
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active';
