@@ -284,7 +284,7 @@ FROM ((caps_serialrentallog
       
 WHERE caps_serialrentallog.caps_productcategoryserial = 'fdfd691a-66f0-e711-8135-e0071b67ac81'
 AND caps_serialrentallog.caps_hirestatus = 'Available'
-AND caps_serialrentallog.statuscode = 'Active';
+AND caps_serialrentallog.statuscode = 'Active'
 
 UNION
 -- Desiccant Air Dryers
@@ -310,4 +310,31 @@ FROM ((caps_serialrentallog
       
 WHERE caps_serialrentallog.caps_productcategoryserial = 'f59e508c-0831-ee11-bdf4-6045bd3df4c4'
 AND caps_serialrentallog.caps_hirestatus = 'Available'
-AND caps_serialrentallog.statuscode = 'Active';
+AND caps_serialrentallog.statuscode = 'Active'
+
+
+UNION
+-- NITROGEN
+SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
+              caps_serialrentallog.statuscode AS 'Active',
+              caps_serialrentallog.caps_siteaccountserialnumber   AS 'branch',
+              caps_serialrentallog.caps_productserialnumber       AS 'product_code',
+              caps_serialrentallog.caps_servicenumberserialnumber AS 'service_number',
+              caps_productcategory.caps_name                      AS 'category',
+              caps_serialrentallog.caps_productcategoryserial            AS 'category_serial',
+NULL    AS 'product_content',
+NULL   AS 'short_name',
+NULL   AS 'product_title',
+NULL   AS 'photo',
+NULL   AS 'product_cfm',
+NULL   AS 'product_cap_mmin',
+NULL   AS 'product_psi_working',
+NULL   AS 'prime_power_kva',
+NULL   AS 'prime_power_kw'      
+                  
+FROM ((caps_serialrentallog
+       JOIN caps_productcategory ON( caps_productcategory.caps_productcategoryid = caps_serialrentallog.caps_productcategoryserial )))
+      
+WHERE caps_serialrentallog.caps_productcategoryserial = '7c0807d9-64f0-e711-8135-e0071b67ac81'
+AND caps_serialrentallog.caps_hirestatus = 'Available'
+AND caps_serialrentallog.statuscode = 'Active'
