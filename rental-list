@@ -69,6 +69,7 @@ Template Name: Rental-list
                         <li data-slug="desiccant-dryer" data-id="desiccant_dryer">Desiccant Dryer</li>
                         <li data-slug="refrigerated_dryer" data-id="refrigerated-dryer">Refrigerated Dryer</li>
                         <li data-slug="generator" data-id="generator">Generator</li>
+                        <li data-slug="gas-generation" data-id="gas_generation">Gas Generation</li>
                         <!-- li data-slug="compressor" data-id="compressor">Air Compressors</li> -->
                         <li data-slug="portable-compressor" data-id="portable_compressor">Portable Compressor</li>
                         <li data-slug="air-compressor" data-id="air_compressor">Reciprocating Air Compressor</li>
