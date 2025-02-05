@@ -1,4 +1,4 @@
--- DROP VIEW product_specs_update2;
+DROP VIEW rental_log_view;
 CREATE VIEW rental_log_view AS
 
 SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
@@ -286,6 +286,7 @@ WHERE caps_serialrentallog.caps_productcategoryserial = 'fdfd691a-66f0-e711-8135
 AND caps_serialrentallog.caps_hirestatus = 'Available'
 AND caps_serialrentallog.statuscode = 'Active';
 
+UNION
 -- Desiccant Air Dryers
 SELECT DISTINCT caps_serialrentallog.caps_hirestatus AS 'hire_status',
               caps_serialrentallog.statuscode AS 'Active',
